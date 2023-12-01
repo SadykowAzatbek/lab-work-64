@@ -3,10 +3,15 @@ import {addPost, PostData} from '../../../types';
 import axiosApi from '../../axiosApi';
 import {useNavigate} from 'react-router-dom';
 
-const FormPost = () => {
+interface Props {
+  onSubmit: (addPost: addPost) => void;
+}
+
+const FormPost: React.FC<Props> = ({onSubmit}) => {
   const [post, setPost] = useState<addPost>({
     name: '',
     text: '',
+    date: '',
   });
 
   const navigate = useNavigate();
@@ -17,6 +22,7 @@ const FormPost = () => {
     setPost((prevState) => ({
       ...prevState,
     [name]: value,
+      date: Date(),
     }));
   };
 
@@ -32,6 +38,8 @@ const FormPost = () => {
     } catch (err) {
       console.log('404 error ' + err);
     }
+
+    onSubmit(post);
 
     navigate('/');
   };
