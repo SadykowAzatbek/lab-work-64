@@ -15,6 +15,8 @@ const FormPost: React.FC<Props> = ({onSubmit}) => {
     date: '',
   });
 
+  const params = useParams();
+
   const navigate = useNavigate();
 
   const changePost = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -38,15 +40,13 @@ const FormPost: React.FC<Props> = ({onSubmit}) => {
     try {
       await axiosApi.post('posts.json', postData);
     } catch (err) {
-      console.log('404 error ' + err);
+      console.log('error ' + err);
     }
 
     onSubmit(post);
 
     navigate('/');
   };
-
-  const params = useParams();
 
   let title = '';
 

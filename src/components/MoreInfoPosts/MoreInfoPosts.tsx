@@ -17,7 +17,7 @@ const MoreInfoPosts: React.FC<Props> = ({addPosts}) => {
         {selectedPost.date}
         <h4 className="mt-2">{selectedPost.name}</h4>
         <p>{selectedPost.text}</p>
-        <Link to={'/posts/' + params.id + '/edit'} onClick={}>edit</Link>
+        <Link to={'/posts/' + params.id + '/edit'} className="btn">edit</Link>
         <button>Delete</button>
       </div>
     </div>
