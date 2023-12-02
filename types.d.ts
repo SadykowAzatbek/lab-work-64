@@ -1,4 +1,5 @@
 export interface addPost {
+  id: string;
   name: string;
   text: string;
   date: string;

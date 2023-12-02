@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {addPost, PostData} from '../../../types';
 import axiosApi from '../../axiosApi';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 
 interface Props {
   onSubmit: (addPost: addPost) => void;
@@ -9,6 +9,7 @@ interface Props {
 
 const FormPost: React.FC<Props> = ({onSubmit}) => {
   const [post, setPost] = useState<addPost>({
+    id: '',
     name: '',
     text: '',
     date: '',
@@ -22,6 +23,7 @@ const FormPost: React.FC<Props> = ({onSubmit}) => {
     setPost((prevState) => ({
       ...prevState,
     [name]: value,
+      id: Math.random().toString(),
       date: Date(),
     }));
   };
@@ -44,9 +46,19 @@ const FormPost: React.FC<Props> = ({onSubmit}) => {
     navigate('/');
   };
 
+  const params = useParams();
+
+  let title = '';
+
+  if (params.id) {
+    title = 'Edit';
+  } else {
+    title = 'Add new post';
+  }
+
   return (
     <div className="ms-auto me-auto w-50">
-      <h4>Add new post</h4>
+      <h4>{title}</h4>
       <form onSubmit={form}>
         <input
           required

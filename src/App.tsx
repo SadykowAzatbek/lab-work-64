@@ -3,6 +3,8 @@ import {NavLink, Route, Routes} from 'react-router-dom';
 import FormPost from './components/FormPost/FormPost';
 import {useState} from 'react';
 import {addPost} from '../types';
+import MoreInfoPosts from './components/MoreInfoPosts/MoreInfoPosts';
+import Home from "./components/Home/Home";
 
 function App() {
   const [addPosts, setAddPosts] = useState<addPost[]>([]);
@@ -34,20 +36,11 @@ function App() {
       </header>
       <main>
         <Routes>
-          <Route path="/" element={(
-            <div>
-              {addPosts.map((elem) => (
-                <div className="date border border-3 border-success p-2 ms-4 me-4 rounded-2 mb-3" key={Math.random()}>
-                  {elem.date}
-                  <h4 className="mt-2">{elem.name}</h4>
-                  <button className="btn btn-light border border-dark">Read more</button>
-                </div>
-              ))}
-            </div>
-          )}/>
-          <Route path="/new-post" element={(
-            <FormPost onSubmit={addPost}/>
-          )} />
+          <Route path="/" element={<Home addPosts={addPosts} />}/>
+          <Route path="/post" element={<Home addPosts={addPosts} />}/>
+          <Route path="/posts/:id" element={<MoreInfoPosts addPosts={addPosts} />}/>
+          <Route path="/new-post" element={<FormPost onSubmit={addPost}/>} />
+          <Route path="/posts/:id/edit" element={<FormPost onSubmit={addPost}/>} />
         </Routes>
       </main>
     </>
